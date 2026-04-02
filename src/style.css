@@ -85,5 +85,66 @@ ul{
   color: var(--sub-text-color);
 }
 .todoContent{
-  border: 1px solid rgb(163, 207, 233);
+  /*border: 1px solid rgb(163, 207, 233); */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+.addBtn{
+  border: 1px dashed #C6BDED;
+  place-self: center;
+  border-radius: 0.5rem;
+  padding: 0.3rem 4rem;
+  color: var(--text-glow);
+}
+.card{
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  background-color: #FFFFFF;
+}
+.overview{
+  border: 3px solid yellow;
+  display: flex;
+  justify-content: space-between;
+}
+.overviewHeader{
+  display: flex;
+  gap: 1rem;
+}
+.priority{
+  border: 1px solid;
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
+}
+.title{
+  border: 1px solid red;
+  padding: 0.2rem 1rem;
+}
+.interactive{
+  display: flex;
+}
+.classification{
+  border: 1px solid orange;
+  display: flex;
+  gap: 2rem;
+}
+.projectGroup{
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--main-textBg-color);
+  color: var(--text-glow);
+}
+.highPriority{
+  color: #E05555;
+  background-color: #FFE4E4;
+}
+.mediumPriority{
+  color: #E09A00;
+  background-color: #FFF3E0;
+}
+.lowPriority{
+  color: #4CAF50;
+  background-color: #E8F5E9;
 }

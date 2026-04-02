@@ -4,10 +4,12 @@ export function createCard(title, description, dueDate, priority, project){
 
     const overview = elementCreate("div","overview", "");
     const interactive = elementCreate("div","interactive", "");
+    const overviewHeader = elementCreate("div", "overviewHeader", "");
     const classification = elementCreate("div","classification","");
 
     interactive.append(elementCreate("svg", "dotsBtn","imgsrc"), elementCreate("div", "markComplete", ""));
-    overview.append(elementCreate("div", "priority", priority), elementCreate("div", "title", title), interactive);
+    overviewHeader.append(elementCreate("div", "priority", priority), elementCreate("div", "title", title))
+    overview.append(elementCreate(overviewHeader, interactive));
     classification.append(elementCreate("div", "dueDate", dueDate), elementCreate("div", "projectGroup", project));
 
 
