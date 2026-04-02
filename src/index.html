@@ -6,16 +6,29 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
-        <div id="sidebar"></div>
-        
+    <main class="main">
+        <div id="sidebar">
+            <div class="sidebarNav">
+                <div class="header">App Name</div>
+                <ul class="navOption">
+                    <li class="selectedBtn">Home</li>
+                    <li class="navBtn">Today</li>
+                    <ul id="projectBtn" class="navBtn">Project
+                        
+                    </ul>
+                </ul>
+            </div>
+            <div class="greeting">
+                <div>Welcome</div>
+            </div>
+        </div>
         <div id="content">
-            <div class="contentHeader"></div>
+            <div class="contentHeader">Home</div>
             <div class="contentNav">
                 <span>Tasks</span>
                 <span>Completed</span>
             </div>
-            <div class="contentList"></div>
+            <div class="todoContent"></div>
         </div>
     </main>
 </body>
