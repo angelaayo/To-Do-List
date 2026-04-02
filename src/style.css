@@ -64,3 +64,26 @@ ul{
 .greeting{
   border: 1px solid red;
 }
+#content{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(97, 132, 219);
+  padding: 1rem;
+  background-color: #FAFAFE;
+  gap: 1rem;
+}
+.contentNav{
+  display: flex;
+  gap: 1rem;
+}
+.selectedTxt{
+  color: var(--text-glow);
+  border-bottom: 1px solid;
+  padding-bottom: 0.3rem;
+}
+.navTxt{
+  color: var(--sub-text-color);
+}
+.todoContent{
+  border: 1px solid rgb(163, 207, 233);
+}
