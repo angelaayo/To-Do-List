@@ -1,4 +1,4 @@
-export function createCard(title, description, dueDate, priority, project){
+export function createCard(title, priority, dueDate, project, description){
     const card = document.createElement("div");
     card.className = "card";
 

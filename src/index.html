@@ -32,7 +32,7 @@
                 <div class="card">
                     <div class="overview">
                         <div class="overviewHeader">
-                            <div class="priority">High</div>
+                            <div class="highPriority">High</div>
                             <div class="title">Design Landing Page</div>
                         </div>
                         <div class="interactive">
@@ -46,9 +46,41 @@
                     </div>
                     <div class="taskDescriptor">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur eius asperiores voluptatem assumenda porro pariatur unde libero eum, nesciunt dicta totam cupiditate animi deleniti temporibus ipsam iste laboriosam quisquam maiores.</div>
                 </div>
-                <div class="addBtn">+ Add Task</div>
+                <button class="addBtn">+ Add Task</button>
             </div>
         </div>
     </main>
+    <div id="overlay">
+        <div id="popUp">
+            <div class="formHeader">Add new task</div>
+            <form>
+                <label for="taskTitle">Task Title</label>
+                <input id="taskTitle" type="text" required placeholder="Enter task title...">
+                <label for="taskPriority">Priority</label>
+                <div id="taskPriority">
+                    <button class="highPriority">High</button>
+                    <button class="mediumPriority">Medium</button>
+                    <button class="lowPriority">Low</button>
+                </div>
+                <label for="taskDate">Due Date</label>
+                <div class="dateContainer">
+                    <input id="taskDate" type="date" required>
+                    <span>Due Date:</span>
+                </div>
+                <label for="taskProject">Project Group</label>
+                <select id="taskProject">
+                    <option value="" disabled selected>Select Project</option>
+                    <option value="gym">Gym</option>
+                    <option value="new" >Create New Project</option>
+                </select>
+                <label for="taskDescription">Description</label>
+                <textarea id="taskDescription" name="taskDescription" placeholder="Add a description..." rows="4"></textarea>
+                <div class="formOption">
+                    <button id="formCancelBtn">Cancel</button>
+                    <button id="formSubmitBtn" type="submit">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

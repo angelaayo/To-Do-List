@@ -87,7 +87,8 @@ ul{
 .todoContent{
   /*border: 1px solid rgb(163, 207, 233); */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
 }
 .addBtn{
   border: 1px dashed #C6BDED;
@@ -95,11 +96,12 @@ ul{
   border-radius: 0.5rem;
   padding: 0.3rem 4rem;
   color: var(--text-glow);
+  background-color: transparent;
 }
 .card{
   display: flex;
   flex-direction: column;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem;
   border-radius: 1rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
   background-color: #FFFFFF;
@@ -108,15 +110,16 @@ ul{
   border: 3px solid yellow;
   display: flex;
   justify-content: space-between;
+  text-align: center;
+}
+.overview > *{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .overviewHeader{
   display: flex;
   gap: 1rem;
-}
-.priority{
-  border: 1px solid;
-  padding: 0.2rem 1rem;
-  border-radius: 0.5rem;
 }
 .title{
   border: 1px solid red;
@@ -136,15 +139,85 @@ ul{
   background-color: var(--main-textBg-color);
   color: var(--text-glow);
 }
+#popUp{
+  border: 1px solid green;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border: 1px solid rgb(133, 123, 221);
+  gap: 0.5rem;
+}
+label{
+  color: #8A85A0;
+}
+.formHeader{
+  text-align: center;
+}
+input, #taskProject, #taskDescription{
+  margin-left: 1rem;
+  padding: 0.3rem 1rem;
+  border-radius: 0.3rem;
+  border: 2px solid #E8E4F8;
+  background-color: #FAFAFE;
+}
+input::placeholder, #taskDate, #taskProject, #taskDescription::placeholder{
+  color: #B8B0E0;
+}
+#taskProject option{
+  color: black;
+}
+#taskProject{
+  max-width: 40%;
+}
+#taskDescription{
+  max-width: 60%;
+  overflow-y: auto;
+  resize: none;
+  line-height: 1.5;
+  outline: none;
+}
+.formOption{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+#formCancelBtn{
+  padding: 0.5rem 3rem;
+  border-radius: 0.3rem;
+  border: 2px solid #E8E4F8;
+  background-color: #FAFAFE;
+  color: #8A85A0;
+}
+#formSubmitBtn{
+  padding: 0.5rem 3rem;
+  border-radius: 0.3rem;
+  background-color: var(--text-glow);
+  border: 0px;
+  color: #FFFFFF;
+}
+#taskPriority{
+  margin-left: 1rem;
+}
 .highPriority{
   color: #E05555;
   background-color: #FFE4E4;
+  border: 0px solid;
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
 }
 .mediumPriority{
   color: #E09A00;
   background-color: #FFF3E0;
+  border: 0px solid;
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
 }
 .lowPriority{
   color: #4CAF50;
   background-color: #E8F5E9;
+  border: 0px solid;
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
 }
