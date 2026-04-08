@@ -199,25 +199,51 @@ input::placeholder, #taskDate, #taskProject, #taskDescription::placeholder{
 }
 #taskPriority{
   margin-left: 1rem;
+  display: flex;
+  gap: 1rem;
 }
-.highPriority{
+input[type = "radio"]{
+  display: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.high{
   color: #E05555;
   background-color: #FFE4E4;
   border: 0px solid;
   padding: 0.2rem 1rem;
   border-radius: 0.5rem;
 }
-.mediumPriority{
+.high.active{
+  border: 1px solid #E05555;
+}
+.medium{
   color: #E09A00;
   background-color: #FFF3E0;
   border: 0px solid;
   padding: 0.2rem 1rem;
   border-radius: 0.5rem;
 }
-.lowPriority{
+.medium.active{
+  border: 1px solid #E09A00;
+}
+.low{
   color: #4CAF50;
   background-color: #E8F5E9;
   border: 0px solid;
   padding: 0.2rem 1rem;
   border-radius: 0.5rem;
+}
+.low.active{
+ border: 1px solid #4CAF50;
+}
+.errorMsg{
+  margin: 0.5rem 2rem;
+  color: #E05555;
+}
+.errorMsg.hidden{
+  display: none;
+}
+#popUp.hidden{
+  display: none;
 }

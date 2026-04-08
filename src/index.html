@@ -28,11 +28,11 @@
                 <span class="selectedTxt">Tasks</span>
                 <span class="navTxt">Completed</span>
             </div>
-            <div class="todoContent">
+            <div id="todoContent">
                 <div class="card">
                     <div class="overview">
                         <div class="overviewHeader">
-                            <div class="highPriority">High</div>
+                            <div class="high">High</div>
                             <div class="title">Design Landing Page</div>
                         </div>
                         <div class="interactive">
@@ -51,24 +51,31 @@
         </div>
     </main>
     <div id="overlay">
-        <div id="popUp">
+        <div id="popUp" class="hidden">
             <div class="formHeader">Add new task</div>
-            <form>
+            <form id="taskForm">
                 <label for="taskTitle">Task Title</label>
                 <input id="taskTitle" type="text" required placeholder="Enter task title...">
                 <label for="taskPriority">Priority</label>
-                <div id="taskPriority">
-                    <button class="highPriority">High</button>
-                    <button class="mediumPriority">Medium</button>
-                    <button class="lowPriority">Low</button>
+                <div role="radiogroup" id="taskPriority">
+                     <label class="high">High
+                        <input type="radio" name="priority" value="high">
+                    </label>
+                     <label class="medium">Medium
+                        <input type="radio" name="priority" value="medium">
+                    </label>
+                    <label class="low">Low
+                        <input type="radio" name="priority" value="low">
+                    </label>
                 </div>
+                <div class="errorMsg hidden">Please Select a priority</div>
                 <label for="taskDate">Due Date</label>
                 <div class="dateContainer">
                     <input id="taskDate" type="date" required>
                     <span>Due Date:</span>
                 </div>
                 <label for="taskProject">Project Group</label>
-                <select id="taskProject">
+                <select id="taskProject" required>
                     <option value="" disabled selected>Select Project</option>
                     <option value="gym">Gym</option>
                     <option value="new" >Create New Project</option>

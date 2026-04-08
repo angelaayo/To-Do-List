@@ -1,4 +1,4 @@
-export function createCard(title, priority, dueDate, project, description){
+export function createCard(task){
     const card = document.createElement("div");
     card.className = "card";
 
@@ -8,12 +8,12 @@ export function createCard(title, priority, dueDate, project, description){
     const classification = elementCreate("div","classification","");
 
     interactive.append(elementCreate("svg", "dotsBtn","imgsrc"), elementCreate("div", "markComplete", ""));
-    overviewHeader.append(elementCreate("div", "priority", priority), elementCreate("div", "title", title))
+    overviewHeader.append(elementCreate("div", task.priority, task.priority), elementCreate("div", "title", task.title))
     overview.append(elementCreate(overviewHeader, interactive));
-    classification.append(elementCreate("div", "dueDate", dueDate), elementCreate("div", "projectGroup", project));
+    classification.append(elementCreate("div", "dueDate", task.dueDate), elementCreate("div", "projectGroup", task.project));
 
 
-    card.append(overview, classification, elementCreate("div","taskDescriptor", description));
+    card.append(overview, classification, elementCreate("div","taskDescriptor", task.description));
 
     return card;
 }
