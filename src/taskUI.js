@@ -39,3 +39,11 @@ function elementCreate(type, className, content){
     }
     
 }
+
+export function addProject(projectTitle){
+    const projectOptions = document.querySelector("#taskproject");
+    const element  = document.createElement("option");
+    element.value = projectTitle;
+    element.textContent = projectTitle
+    projectOptions.append(element);
+}
