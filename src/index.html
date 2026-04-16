@@ -32,12 +32,12 @@
                 <div class="card">
                     <div class="overview">
                         <div class="overviewHeader">
-                            <div class="high">High</div>
+                            <div class="High">High</div>
                             <div class="title">Design Landing Page</div>
                         </div>
                         <div class="interactive">
-                            <div class="dotsBtn">...</div>
-                            <div class="markComplete">me</div>
+                            <img class="dotsBtn" src="dots-horizontal.svg">
+                            <input type="checkbox" class="markComplete">
                         </div>
                     </div>
                     <div class="classification">
@@ -58,14 +58,14 @@
                 <input id="taskTitle" type="text" required placeholder="Enter task title...">
                 <label for="taskPriority">Priority</label>
                 <div role="radiogroup" id="taskPriority">
-                     <label class="high">High
-                        <input type="radio" name="priority" value="high">
+                    <label class="High">High
+                        <input type="radio" name="priority" value="High">
                     </label>
-                     <label class="medium">Medium
-                        <input type="radio" name="priority" value="medium">
+                     <label class="Medium">Medium
+                        <input type="radio" name="priority" value="Medium">
                     </label>
-                    <label class="low">Low
-                        <input type="radio" name="priority" value="low">
+                    <label class="Low">Low
+                        <input type="radio" name="priority" value="Low">
                     </label>
                 </div>
                 <div class="errorMsg hidden">Please Select a priority</div>
@@ -77,7 +77,7 @@
                 <label for="taskProject">Project Group</label>
                 <select id="taskProject" required>
                     <option value="" disabled selected>Select Project</option>
-                    <option value="gym">Gym</option>
+                    <option value="Gym">Gym</option>
                     <option value="new" >Create New Project</option>
                 </select>
                 <label for="taskDescription">Description</label>
@@ -86,6 +86,9 @@
                     <button id="formCancelBtn">Cancel</button>
                     <button id="formSubmitBtn" type="submit">Add Task</button>
                 </div>
+            </form>
+            <form id="addProject">
+
             </form>
         </div>
     </div>

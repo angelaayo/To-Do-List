@@ -84,8 +84,8 @@ ul{
 .navTxt{
   color: var(--sub-text-color);
 }
-.todoContent{
-  /*border: 1px solid rgb(163, 207, 233); */
+#todoContent{
+  /*border: 3px solid rgb(163, 207, 233);*/
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 1rem;
@@ -101,13 +101,16 @@ ul{
 .card{
   display: flex;
   flex-direction: column;
-  padding: 0.4rem;
+  padding: 0.5rem;
   border-radius: 1rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
   background-color: #FFFFFF;
+  gap: 0.7rem;
+  height: fit-content;
+  
 }
 .overview{
-  border: 3px solid yellow;
+  /*border: 3px solid yellow;*/
   display: flex;
   justify-content: space-between;
   text-align: center;
@@ -127,6 +130,9 @@ ul{
 }
 .interactive{
   display: flex;
+}
+.dotsBtn{
+  height: 1rem;
 }
 .classification{
   border: 1px solid orange;
@@ -207,34 +213,34 @@ input[type = "radio"]{
   appearance: none;
   -webkit-appearance: none;
 }
-.high{
+.High{
   color: #E05555;
   background-color: #FFE4E4;
   border: 0px solid;
   padding: 0.2rem 1rem;
   border-radius: 0.5rem;
 }
-.high.active{
+.High.active{
   border: 1px solid #E05555;
 }
-.medium{
+.Medium{
   color: #E09A00;
   background-color: #FFF3E0;
   border: 0px solid;
   padding: 0.2rem 1rem;
   border-radius: 0.5rem;
 }
-.medium.active{
+.Medium.active{
   border: 1px solid #E09A00;
 }
-.low{
+.Low{
   color: #4CAF50;
   background-color: #E8F5E9;
   border: 0px solid;
   padding: 0.2rem 1rem;
   border-radius: 0.5rem;
 }
-.low.active{
+.Low.active{
  border: 1px solid #4CAF50;
 }
 .errorMsg{

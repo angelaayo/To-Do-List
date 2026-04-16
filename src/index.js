@@ -1,15 +1,27 @@
 import "./style.css";
 import {task} from "./task.js";
-import { createCard } from "./taskUI.js";
+import { createCard, addProject } from "./taskUI.js";
+import {projects} from "./projects.js";
 console.log("Hello world");
 
 function init(){
+    /*let projectArray = [new projects("Gym")];
+    projectArray.forEach(content=>{
+        addProject(content.title);
+    })*/
     document.querySelector(".addBtn").addEventListener("click", handleTaskAdd);
+    document.querySelector("#taskPriority").addEventListener("change", (e)=>{handlePriority(e);});
+    
+        document.querySelector("#taskForm").addEventListener("submit", (e)=>{
+            const todoContainer = document.querySelector("#todoContent");
+            const newCard = handleSubmit(e);
+            if(newCard){
+                todoContainer.insertBefore(newCard, todoContainer.lastElementChild);
+            }
+        });
 
     function handleTaskAdd(){
         document.querySelector("#popUp").classList.remove("hidden");
-        document.querySelector("#taskPriority").addEventListener("change", (e)=>{handlePriority(e);});
-        document.querySelector("#taskForm").addEventListener("submit", (e)=>{handleSubmit(e);});
     }
 
     function handlePriority(e){
@@ -17,24 +29,25 @@ function init(){
             label.classList.remove("active")
         })
         e.target.closest("label").classList.add("active");
-        return e.target.closest("label").value;  //probably need to delete
     }
     function handleSubmit(e){
         e.preventDefault();
-        const todoContainer = document.querySelector("#todoContent");
         const formData = getFormData();
-        if(!formData){
-
-            
+        if(!formData.priority){
+            document.querySelector(".errorMsg").classList.remove("hidden");
+            return  
         }
-        console.log(formData);
+        
         const newCard = addTask(formData);
-        todoContainer.insertBefore(newCard, todoContainer.lastChild);
 
-
+        document.querySelectorAll("#taskPriority label").forEach(label =>{
+            label.classList.remove("active")
+        })
+        document.querySelector(".errorMsg").classList.add("hidden");
         document.querySelector("#popUp").classList.add("hidden");
         e.target.reset();
 
+        return newCard;
     }
 
     function addTask(formData){
@@ -44,12 +57,11 @@ function init(){
     function getFormData(){
         const title = document.querySelector("#taskTitle").value;
         const priority = document.querySelector('#taskPriority input[type="radio"]:checked')?.value
-        if(!priority){
-            document.querySelector(".errorMsg").classList.remove("hidden");
-            return
-        }
         const date = document.querySelector("#taskDate").value;
         const project = document.querySelector("#taskProject").value;
+        if(project.value == "new"){
+            //newProject();
+        }
         const description = document.querySelector("#taskDescription").value;
 
         return{title, priority, date, project, description};
