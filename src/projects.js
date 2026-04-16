@@ -4,7 +4,7 @@ export class projects{
         taskArray = [];
     }
 
-    addTask(taskname){
-        this.taskArray.push(taskname);
+    addTask(taskObject){
+        this.taskArray.push(taskObject);
     }
 }
