@@ -5,7 +5,7 @@ export class task{
         this.dueDate = dueDate;
         this.priority = priority;
         this.completed = false;
-        this.project = project;
+        this.projectName = project;
     }
 
     toggleComplete(){

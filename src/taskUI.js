@@ -11,7 +11,7 @@ export function createCard(task){
     interactive.append(elementCreate("img", "dotsBtn", menuDots), elementCreate("input", "markComplete", ""));
     overviewHeader.append(elementCreate("div", task.priority, task.priority), elementCreate("div", "title", task.title))
     overview.append(overviewHeader, interactive);
-    classification.append(elementCreate("div", "dueDate", "Due: "+task.dueDate), elementCreate("div", "projectGroup", task.project));
+    classification.append(elementCreate("div", "dueDate", "Due: "+task.dueDate), elementCreate("div", "projectGroup", task.projectName));
 
 
     card.append(overview, classification, elementCreate("div","taskDescriptor", task.description));
@@ -40,7 +40,7 @@ function elementCreate(type, className, content){
     
 }
 
-export function addProject(projectName){
+export function addProjectUI(projectName){
     const projectOptions = document.querySelector("#taskProject");
     const projectheader = document.querySelector("#projectBtn");
     

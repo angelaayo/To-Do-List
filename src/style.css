@@ -196,7 +196,12 @@ input::placeholder, #taskDate, #taskProject, #taskDescription::placeholder{
   background-color: #FAFAFE;
   color: #8A85A0;
 }
-#formSubmitBtn{
+
+#addProject > :nth-child(2){
+  display: flex;
+  gap: 3rem;
+}
+#formSubmitBtn, #addProjectBtn{
   padding: 0.5rem 3rem;
   border-radius: 0.3rem;
   background-color: var(--text-glow);
@@ -251,6 +256,10 @@ input[type = "radio"]{
   display: none;
 }
 #popUp.hidden{
+  display: none;
+}
+
+.hidden{
   display: none;
 }
 
