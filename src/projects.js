@@ -1,10 +1,14 @@
 export class projects{
-    constructor(name, taskArray){
+    constructor(name, taskList, completedTaskList){
         this.name = name;
-        taskArray = [];
+        taskList = [];
+        completedTaskList = [];
     }
 
     addTask(taskObject){
-        this.taskArray.push(taskObject);
+        this.taskList.push(taskObject);
+    }
+    addCompletedTask(taskObject){
+        this.completedTaskList.push(taskObject);
     }
 }

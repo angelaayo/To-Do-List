@@ -1,14 +1,14 @@
 import "./style.css";
 import {task} from "./task.js";
-import { createCard, addProject } from "./taskUI.js";
+import { createCard, addProject} from "./taskUI.js";
 import {projects} from "./projects.js";
 console.log("Hello world");
 
 function init(){
-    /*let projectArray = [new projects("Gym")];
+    let projectArray = [new projects("Gym")];
     projectArray.forEach(content=>{
-        addProject(content.title);
-    })*/
+        addProject(content.name);
+    });
     document.querySelector(".addBtn").addEventListener("click", handleTaskAdd);
     document.querySelector("#taskPriority").addEventListener("change", (e)=>{handlePriority(e);});
     
@@ -66,5 +66,7 @@ function init(){
 
         return{title, priority, date, project, description};
     }
+
+    
 }
 init();

@@ -40,10 +40,17 @@ function elementCreate(type, className, content){
     
 }
 
-export function addProject(projectTitle){
-    const projectOptions = document.querySelector("#taskproject");
-    const element  = document.createElement("option");
-    element.value = projectTitle;
-    element.textContent = projectTitle
-    projectOptions.append(element);
+export function addProject(projectName){
+    const projectOptions = document.querySelector("#taskProject");
+    const projectheader = document.querySelector("#projectBtn");
+    const optionElement  = document.createElement("option");
+    const tabElement = document.createElement("li");
+    optionElement.value = projectName;
+    optionElement.textContent = projectName;
+
+    tabElement.value = projectName;
+    tabElement.textContent = projectName;
+    tabElement.className = "projectOption"
+    projectOptions.append(optionElement);
+    projectheader.append(tabElement);
 }
