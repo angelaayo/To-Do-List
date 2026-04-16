@@ -1,5 +1,4 @@
 import "./style.css";
-import {task} from "./task.js";
 import { createCard, addProject} from "./taskUI.js";
 import {projects} from "./projects.js";
 console.log("Hello world");
@@ -38,7 +37,6 @@ function init(){
             return  
         }
         
-        const newCard = addTask(formData);
 
         document.querySelectorAll("#taskPriority label").forEach(label =>{
             label.classList.remove("active")
@@ -47,12 +45,7 @@ function init(){
         document.querySelector("#popUp").classList.add("hidden");
         e.target.reset();
 
-        return newCard;
-    }
-
-    function addTask(formData){
-        const newTask = new task(formData.title, formData.description, formData.date, formData.priority, formData.project);
-        return createCard(newTask);
+        return appendTask(formData);
     }
     function getFormData(){
         const title = document.querySelector("#taskTitle").value;
@@ -65,6 +58,13 @@ function init(){
         const description = document.querySelector("#taskDescription").value;
 
         return{title, priority, date, project, description};
+    }
+
+    function appendTask(formData){
+        const project = projectArray.find(p => p.name == formData.project);
+        const newCard = createCard(project.createTask(formData));
+        return newCard
+
     }
 
     

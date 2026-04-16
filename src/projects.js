@@ -1,13 +1,17 @@
+import {task} from "./task.js";
 export class projects{
-    constructor(name, taskList, completedTaskList){
+    constructor(name){
         this.name = name;
-        taskList = [];
-        completedTaskList = [];
+        this.taskList = [];
+        this.completedTaskList = [];
     }
 
-    addTask(taskObject){
-        this.taskList.push(taskObject);
+    createTask(formData){
+        const newTask = new task(formData.title, formData.description, formData.date, formData.priority, formData.project);
+        this.taskList.push(newTask);
+        return newTask;
     }
+    
     addCompletedTask(taskObject){
         this.completedTaskList.push(taskObject);
     }
