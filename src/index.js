@@ -17,12 +17,16 @@ function init(){
             label.classList.remove("active")
         })
         e.target.closest("label").classList.add("active");
-        return e.target.closest("label").value;
+        return e.target.closest("label").value;  //probably need to delete
     }
     function handleSubmit(e){
         e.preventDefault();
         const todoContainer = document.querySelector("#todoContent");
         const formData = getFormData();
+        if(!formData){
+
+            
+        }
         console.log(formData);
         const newCard = addTask(formData);
         todoContainer.insertBefore(newCard, todoContainer.lastChild);
