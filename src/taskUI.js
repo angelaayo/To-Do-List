@@ -16,6 +16,8 @@ export function createCard(task){
 
     card.append(overview, classification, elementCreate("div","taskDescriptor", task.description));
 
+    card.dataset.id = task.id;
+    card.dataset.project = task.projectName;
     return card;
 }
 function elementCreate(type, className, content){
@@ -67,4 +69,30 @@ export function cardVisuals(style, cardList){
     cardList.forEach(taskCard=>{
         todoContainer.appendChild(taskCard);
     })
+}
+
+export function toggleTabUI(e){
+    const elements = document.querySelectorAll(".navBtn");
+    elements.forEach(element =>{
+        element.classList.remove("selectedBtn");
+    })
+
+    e.target.classList.add("selectedBtn");
+}
+
+export function removeTask(e){
+    const taskCard = e.target.closest(".card");
+    taskCard.classList.add("fadeOut");
+    taskCard.addEventListener("transitioned", ()=>{
+        taskCard.remove();
+    }, {once: true})
+}
+
+export function headNavUI(e){
+    const elements = document.querySelectorAll(".navTxt");
+    elements.forEach(element =>{
+        element.classList.remove("selectedTxt");
+    })
+
+    e.target.classList.add("selectedTxt");
 }

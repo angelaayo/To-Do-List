@@ -6,18 +6,18 @@ export class projects{
     constructor(name){
         this.name = name;
         this.taskList = [];
-        this.completedTaskList = [];
     }
 
     createTask(formData){
-        const newTask = new task(formData.title, formData.description, formData.date, formData.priority, formData.projectName);
+        const newTask = new task(formData.title, formData.description, formData.date, formData.priority, formData.projectName, crypto.randomUUID());
         this.taskList.push(newTask);
         return newTask;
     }
+
+    getTaskByID(taskID){
+    return this.taskList.find(task => task.id == taskID);
+}
     
-    addCompletedTask(taskObject){
-        this.completedTaskList.push(taskObject);
-    }
 }
 
 export function getProjectArray(){
@@ -35,13 +35,26 @@ export function findProject(name){
 export function retrieveTasks(projectName){
     const project = projectArray.find(p=> p.name == projectName);
     if(project){
-        const projectTasks = [...project.taskList];
-        return projectTasks;
+        return project.taskList.filter(task => !task.completed);
     }
     return [];
 }
 
 export function retrieveAll(){
-    const allTasks  = projectArray.flatMap(project => project.taskList);
+    const allTasks  = projectArray.flatMap(project => project.taskList)
+                                  .filter(task => !task.completed);
     return allTasks;
+}
+
+export function retrieveCompleted(projectName){
+    const project = projectArray.find(p=> p.name == projectName);
+    if(project){
+        return project.taskList.filter(task=> task.completed);
+    }
+    return [];
+}
+
+export function retrieveAllCompleted(){
+   return projectArray.flatMap(project=> project.taskList)
+                      .filter(task => task.completed);
 }

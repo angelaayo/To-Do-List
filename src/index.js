@@ -1,6 +1,6 @@
 import "./style.css";
-import { createCard, addProjectUI, cardVisuals} from "./taskUI.js";
-import {projects, addProjectToArray, findProject, retrieveTasks, retrieveAll} from "./projects.js";
+import { createCard, addProjectUI, cardVisuals, toggleTabUI, removeTask, headNavUI} from "./taskUI.js";
+import {projects, addProjectToArray, findProject, retrieveTasks, retrieveAll, retrieveCompleted, retrieveAllCompleted} from "./projects.js";
 import { task } from "./task.js";
 console.log("Hello world");
 
@@ -23,8 +23,24 @@ function init(){
         cardVisuals("append", cardList);
     });
     document.addEventListener("click", (e)=>{
-        if(e.target.classList.contains("navBtn")){
-            loadTab(e);
+        const checkbox = e.target.closest(".markComplete");
+        if(e.target.classList.contains("navBtn") && e.target.id!="projectBtn"){
+            toggleTabUI(e);
+            loadTabTasks(e);
+        }
+        if(checkbox && checkbox.checked){
+            const clickedTask = e.target.closest(".card");
+            const project = findProject(clickedTask.dataset.project);
+            console.log(project);
+            const cardObject = project.getTaskByID(clickedTask.dataset.id);
+            cardObject.toggleComplete();
+            removeTask(e);
+        }
+        if(e.target.classList.contains("navTxt")){
+            headNavUI(e);
+        }
+        if(e.target.classList.contains("completedBtn")){
+            renderCompleted();
         }
     })
     
@@ -83,24 +99,42 @@ function handleNewProject(e){
     document.querySelector("#taskProject").value = name;
 }
 
-function loadTab(e){
+function loadTabTasks(e){
     const taskList = getTasks(e);
-        const cardList = [];
-        taskList.forEach(task=>{
-            const newCard = createCard(task);
-            cardList.push(newCard);
-        })
-        cardVisuals("renderNew", cardList);
+    const cardList = [];
+    taskList.forEach(task=>{
+        const newCard = createCard(task);
+        cardList.push(newCard);
+    })
+    cardVisuals("renderNew", cardList);
 }
 
 function getTasks(e){
     if(e.target.id == "Home"){
-        const taskRendered = retrieveAll();
-        console.log(taskRendered);
-        return taskRendered;
+        return retrieveAll();
     }
     else{
-        const taskRendered = retrieveTasks(e.target.id);
-        return taskRendered;
+        return retrieveTasks(e.target.id);
+    }
+}
+function renderCompleted(){
+    const completedList = getCompletedTasks();
+    const cardList = [];
+    completedList.forEach(task =>{
+        const newCard = createCard(task);
+        newCard.classList.add("markThrough");
+        cardList.push(newCard);
+    })
+    cardVisuals("renderNew", cardList);
+}
+
+function getCompletedTasks(){
+    const currentTab = document.querySelector(".selectedBtn");
+    if(currentTab.id =="Home"){
+        console.log(retrieveAllCompleted());
+        return retrieveAllCompleted();
+    }
+    else{
+        return retrieveCompleted(currentTab.id);
     }
 }
