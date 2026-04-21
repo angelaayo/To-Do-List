@@ -31,3 +31,17 @@ export function addProjectToArray(name){
 export function findProject(name){
     return projectArray.find(p=> p.name == name);
 }
+
+export function retrieveTasks(projectName){
+    const project = projectArray.find(p=> p.name == projectName);
+    if(project){
+        const projectTasks = [...project.taskList];
+        return projectTasks;
+    }
+    return [];
+}
+
+export function retrieveAll(){
+    const allTasks  = projectArray.flatMap(project => project.taskList);
+    return allTasks;
+}

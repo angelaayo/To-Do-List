@@ -52,8 +52,19 @@ export function addProjectUI(projectName){
     const tabElement = Object.assign(document.createElement("li"), {
         textContent: projectName,
         value: projectName,
-        className: "projectOption"
+        id: projectName
     });
+    tabElement.classList.add("projectOption", "navBtn")
     projectOptions.append(optionElement);
     projectheader.append(tabElement);
+}
+
+export function cardVisuals(style, cardList){
+    const todoContainer = document.querySelector("#todoContent");
+    if(style == "renderNew"){
+        todoContainer.innerHTML ="";
+    }
+    cardList.forEach(taskCard=>{
+        todoContainer.appendChild(taskCard);
+    })
 }
