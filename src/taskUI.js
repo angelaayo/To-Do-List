@@ -82,10 +82,7 @@ export function toggleTabUI(e){
 
 export function removeTask(e){
     const taskCard = e.target.closest(".card");
-    taskCard.classList.add("fadeOut");
-    taskCard.addEventListener("transitioned", ()=>{
-        taskCard.remove();
-    }, {once: true})
+    taskCard.classList.add("hide");
 }
 
 export function headNavUI(e){
@@ -94,5 +91,6 @@ export function headNavUI(e){
         element.classList.remove("selectedTxt");
     })
 
-    e.target.classList.add("selectedTxt");
+    const el = e.target || e;
+    el.classList.add("selectedTxt");
 }

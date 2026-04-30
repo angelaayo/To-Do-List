@@ -5,8 +5,8 @@ import { task } from "./task.js";
 console.log("Hello world");
 
 function init(){
-    addProjectToArray("Gym");
-    addProjectUI("Gym");
+   defaultCard();
+
     document.querySelector(".addBtn").addEventListener("click", handleTaskAdd);
     document.querySelector("#taskPriority").addEventListener("change", (e)=>{handlePriority(e);});
     document.querySelector("#taskProject").addEventListener("change", (e)=>{
@@ -27,6 +27,9 @@ function init(){
         if(e.target.classList.contains("navBtn") && e.target.id!="projectBtn"){
             toggleTabUI(e);
             loadTabTasks(e);
+
+            const defaultHeader = document.querySelector("#taskBtn");
+            headNavUI(defaultHeader);
         }
         if(checkbox && checkbox.checked){
             const clickedTask = e.target.closest(".card");
@@ -38,9 +41,7 @@ function init(){
         }
         if(e.target.classList.contains("navTxt")){
             headNavUI(e);
-        }
-        if(e.target.classList.contains("completedBtn")){
-            renderCompleted();
+            navExecution(e);
         }
     })
     
@@ -110,15 +111,19 @@ function loadTabTasks(e){
 }
 
 function getTasks(e){
-    if(e.target.id == "Home"){
+    const selectedTab = document.querySelector(".navBtn.selectedBtn");
+    console.log(selectedTab.id);
+    if(selectedTab.id == "Home"){
         return retrieveAll();
     }
     else{
-        return retrieveTasks(e.target.id);
+        return retrieveTasks(selectedTab.id);
     }
 }
 function renderCompleted(){
+    console.log("Hello world");
     const completedList = getCompletedTasks();
+    console.log(completedList);
     const cardList = [];
     completedList.forEach(task =>{
         const newCard = createCard(task);
@@ -136,5 +141,31 @@ function getCompletedTasks(){
     }
     else{
         return retrieveCompleted(currentTab.id);
+    }
+}
+
+
+function defaultCard(){
+    addProjectToArray("Work");
+    addProjectUI("Work");
+    const formData = {
+        title: "Design Landing Page",
+        priority: "High",
+        date: "Apr 29 2026",
+        projectName: "Work",
+        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur eius asperiores voluptatem assumenda porro pariatur unde libero eum, nesciunt dicta totam cupiditate animi deleniti temporibus ipsam iste laboriosam quisquam maiores."
+    }
+    const newCard = createTask(formData);
+    const cardList = [];
+    cardList.push(newCard);
+    cardVisuals("append", cardList);
+}
+
+function navExecution(e){
+    if(e.target.classList.contains("completedBtn")){
+        renderCompleted();
+    }
+    else{
+        loadTabTasks(e);
     }
 }

@@ -118,6 +118,10 @@ ul{
 .card.fadeOut{
   opacity: 0;
 }
+
+.card.hide{
+  display: none;
+}
 .overview{
   /*border: 3px solid yellow;*/
   display: flex;
