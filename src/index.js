@@ -2,7 +2,6 @@ import "./style.css";
 import { createCard, addProjectUI, cardVisuals, toggleTabUI, removeTask, headNavUI} from "./taskUI.js";
 import {projects, addProjectToArray, findProject, retrieveTasks, retrieveAll, retrieveCompleted, retrieveAllCompleted} from "./projects.js";
 import { task } from "./task.js";
-console.log("Hello world");
 
 function init(){
    defaultCard();
@@ -17,21 +16,33 @@ function init(){
     document.querySelector("#addProject").addEventListener("submit", (e)=>handleNewProject(e))
     document.querySelector("#taskForm").addEventListener("submit", (e)=>{
         const todoContainer = document.querySelector("#todoContent");
+        const currentTab = document.querySelector(".selectedBtn");
+        const currentHeader = document.querySelector(".selectedTxt");
         const newCard = handleSubmit(e);
-        const cardList = [];
-        cardList.push(newCard);
-        cardVisuals("append", cardList);
+        const projectName = newCard.dataset.project;
+        if((currentTab.id =="Home" || currentTab.id == projectName) 
+            &(currentHeader.id != "completed")){
+            const cardList = [];
+            cardList.push(newCard);
+            cardVisuals("append", cardList);
+        }
+
+
     });
     document.addEventListener("click", (e)=>{
         const checkbox = e.target.closest(".markComplete");
+        const currentHeader = document.querySelector(".selectedTxt");
         if(e.target.classList.contains("navBtn") && e.target.id!="projectBtn"){
             toggleTabUI(e);
             loadTabTasks(e);
+            document.querySelector("#contentHeader").textContent = e.target.id;
 
             const defaultHeader = document.querySelector("#taskBtn");
             headNavUI(defaultHeader);
         }
-        if(checkbox && checkbox.checked){
+        if(checkbox && 
+            ((checkbox.checked && currentHeader.id == "taskBtn")
+                    || (!checkbox.checked && currentHeader.id == "completed"))){
             const clickedTask = e.target.closest(".card");
             const project = findProject(clickedTask.dataset.project);
             console.log(project);
@@ -121,12 +132,15 @@ function getTasks(e){
     }
 }
 function renderCompleted(){
-    console.log("Hello world");
     const completedList = getCompletedTasks();
     console.log(completedList);
     const cardList = [];
     completedList.forEach(task =>{
         const newCard = createCard(task);
+        const checkbox = newCard.querySelector(".markComplete");
+        if(checkbox){
+            checkbox.checked = true;
+        }
         newCard.classList.add("markThrough");
         cardList.push(newCard);
     })

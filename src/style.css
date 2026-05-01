@@ -138,7 +138,6 @@ ul{
   gap: 1rem;
 }
 .title{
-  border: 1px solid red;
   padding: 0.2rem 1rem;
 }
 .interactive{
@@ -148,7 +147,6 @@ ul{
   height: 1rem;
 }
 .classification{
-  border: 1px solid orange;
   display: flex;
   gap: 2rem;
 }
