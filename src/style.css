@@ -156,14 +156,29 @@ ul{
   background-color: var(--main-textBg-color);
   color: var(--text-glow);
 }
+
+#overlay, #projectOverlay{
+ background-color: rgba(0, 0, 0, 0.5);
+ position: fixed;
+ inset: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
 #popUp{
-  border: 1px solid green;
+  width: 80%;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+}
+#addProject{
+  border-radius: 1rem;
+  padding: 0.7rem 1rem;
 }
 form{
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-  border: 1px solid rgb(133, 123, 221);
   gap: 0.5rem;
 }
 label{
@@ -259,19 +274,16 @@ input[type = "radio"]{
 .Low.active{
  border: 1px solid #4CAF50;
 }
-.errorMsg{
+.errorMsg, .projectErrorMsg{
   margin: 0.5rem 2rem;
   color: #E05555;
 }
-.errorMsg.hidden{
-  display: none;
-}
-#popUp.hidden{
-  display: none;
-}
 
-.hidden{
+#overlay.hidden, .errorMsg.hidden, .hidden, #projectOverlay.hidden{
   display: none;
+}
+#addProject{
+  background-color: white;
 }
 
 

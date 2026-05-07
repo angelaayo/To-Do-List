@@ -10,21 +10,26 @@ function init(){
     document.querySelector("#taskPriority").addEventListener("change", (e)=>{handlePriority(e);});
     document.querySelector("#taskProject").addEventListener("change", (e)=>{
         if(e.target.value == "new"){
-            document.querySelector("#addProject").classList.remove("hidden");
+            document.querySelector("#projectOverlay").classList.remove("hidden");
         }
     })
     document.querySelector("#addProject").addEventListener("submit", (e)=>handleNewProject(e))
+    document.querySelector("#formCancelBtn").addEventListener("click", ()=>{
+        document.querySelector("#overlay").classList.add("hidden");
+    })
     document.querySelector("#taskForm").addEventListener("submit", (e)=>{
         const todoContainer = document.querySelector("#todoContent");
         const currentTab = document.querySelector(".selectedBtn");
         const currentHeader = document.querySelector(".selectedTxt");
         const newCard = handleSubmit(e);
-        const projectName = newCard.dataset.project;
-        if((currentTab.id =="Home" || currentTab.id == projectName) 
-            &(currentHeader.id != "completed")){
-            const cardList = [];
-            cardList.push(newCard);
-            cardVisuals("append", cardList);
+        if(newCard){
+            const projectName = newCard.dataset.project;
+            if((currentTab.id =="Home" || currentTab.id == projectName) 
+            &&(currentHeader.id != "completed")){
+                const cardList = [];
+                cardList.push(newCard);
+                cardVisuals("append", cardList);
+            }
         }
 
 
@@ -59,7 +64,7 @@ function init(){
 }
 init();
 function handleTaskAdd(){
-        document.querySelector("#popUp").classList.remove("hidden");
+        document.querySelector("#overlay").classList.remove("hidden");
     }
 
 function handlePriority(e){
@@ -75,11 +80,15 @@ function handleSubmit(e){
         document.querySelector(".errorMsg").classList.remove("hidden");
         return  
     }
+    if(formData.projectName =="" || formData.projectName == "new"){
+        document.querySelector(".projectErrorMsg").classList.remove("hidden");
+        return;
+    }
     document.querySelectorAll("#taskPriority label").forEach(label =>{
         label.classList.remove("active")
     })
     document.querySelector(".errorMsg").classList.add("hidden");
-    document.querySelector("#popUp").classList.add("hidden");
+    document.querySelector("#overlay").classList.add("hidden");
     e.target.reset();
 
     return createTask(formData);
@@ -96,6 +105,7 @@ function getFormData(){
 
 function createTask(formData){
     const project = findProject(formData.projectName);
+    console.log(formData);
     const newCard = createCard(project.createTask(formData));
     return newCard
 
@@ -107,7 +117,7 @@ function handleNewProject(e){
     const name = document.querySelector("#newProjectInput").value;
     addProjectToArray(name);
     addProjectUI(name);
-    document.querySelector("#addProject").classList.add("hidden");
+    document.querySelector("#projectOverlay").classList.add("hidden");
     document.querySelector("#taskProject").value = name;
 }
 

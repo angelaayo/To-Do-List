@@ -12,14 +12,10 @@
                 <div class="header">TO-DO-IST</div>
                 <ul class="navOption">
                     <li id="Home"class="selectedBtn navBtn">Home</li>
-                    <li id="Today"class="navBtn">Today</li>
                     <ul id="projectBtn" class="navBtn">Project
                         
                     </ul>
                 </ul>
-            </div>
-            <div class="greeting">
-                <div>Welcome</div>
             </div>
         </div>
         <div id="content">
@@ -36,8 +32,8 @@
             </div>
         </div>
     </main>
-    <div id="overlay">
-        <div id="popUp" class="hidden">
+    <div id="overlay" class="hidden">
+        <div id="popUp">
             <div class="formHeader">Add new task</div>
             <form id="taskForm">
                 <label for="taskTitle">Task Title</label>
@@ -65,21 +61,24 @@
                     <option value="" disabled selected>Select Project</option>
                     <option value="new" >Create New Project</option>
                 </select>
+                <div class="projectErrorMsg hidden">Please Select a valid project name</div>
                 <label for="taskDescription">Description</label>
                 <textarea id="taskDescription" name="taskDescription" placeholder="Add a description..." rows="4"></textarea>
                 <div class="formOption">
-                    <button id="formCancelBtn">Cancel</button>
+                    <button id="formCancelBtn" type="button">Cancel</button>
                     <button id="formSubmitBtn" type="submit">Add Task</button>
                 </div>
             </form>
-            <form id="addProject" class="hidden">
-                <label for="newProjectInput">Project Name</label>
-                <div>
-                    <input id="newProjectInput"type="text" required placeholder="Enter Project Name">
-                    <button id="addProjectBtn">Add Project</button>
-                </div>
-            </form>
         </div>
+    </div>
+    <div id="projectOverlay" class="hidden">
+        <form id="addProject">
+            <label for="newProjectInput">Project Name</label>
+            <div>
+                <input id="newProjectInput"type="text" required placeholder="Enter Project Name">
+                <button id="addProjectBtn">Add Project</button>
+            </div>
+        </form>
     </div>
 </body>
 </html>
