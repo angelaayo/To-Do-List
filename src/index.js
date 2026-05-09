@@ -1,11 +1,18 @@
 import "./style.css";
 import { createCard, addProjectUI, cardVisuals, toggleTabUI, removeTask, headNavUI} from "./taskUI.js";
-import {projects, addProjectToArray, findProject, retrieveTasks, retrieveAll, retrieveCompleted, retrieveAllCompleted} from "./projects.js";
+import {projects, addProjectToArray, getProjectArray, findProject, retrieveTasks, retrieveAll, retrieveCompleted, retrieveAllCompleted} from "./projects.js";
 import { task } from "./task.js";
 
 function init(){
-   defaultCard();
-
+   const projectArray = JSON.parse(localStorage.getItem("projectArray"));
+   console.table(projectArray);
+   if(projectArray){
+    onLoad(projectArray);
+   }
+   else{
+    console.log("empty");
+    //defaultCard();
+   }
     document.querySelector(".addBtn").addEventListener("click", handleTaskAdd);
     document.querySelector("#taskPriority").addEventListener("change", (e)=>{handlePriority(e);});
     document.querySelector("#taskProject").addEventListener("change", (e)=>{
@@ -23,6 +30,7 @@ function init(){
         const currentHeader = document.querySelector(".selectedTxt");
         const newCard = handleSubmit(e);
         if(newCard){
+            updateLocalStorage(getProjectArray());
             const projectName = newCard.dataset.project;
             if((currentTab.id =="Home" || currentTab.id == projectName) 
             &&(currentHeader.id != "completed")){
@@ -39,7 +47,7 @@ function init(){
         const currentHeader = document.querySelector(".selectedTxt");
         if(e.target.classList.contains("navBtn") && e.target.id!="projectBtn"){
             toggleTabUI(e);
-            loadTabTasks(e);
+            loadTabTasks();
             document.querySelector("#contentHeader").textContent = e.target.id;
 
             const defaultHeader = document.querySelector("#taskBtn");
@@ -50,9 +58,9 @@ function init(){
                     || (!checkbox.checked && currentHeader.id == "completed"))){
             const clickedTask = e.target.closest(".card");
             const project = findProject(clickedTask.dataset.project);
-            console.log(project);
             const cardObject = project.getTaskByID(clickedTask.dataset.id);
             cardObject.toggleComplete();
+            updateLocalStorage(getProjectArray());
             removeTask(e);
         }
         if(e.target.classList.contains("navTxt")){
@@ -90,7 +98,6 @@ function handleSubmit(e){
     document.querySelector(".errorMsg").classList.add("hidden");
     document.querySelector("#overlay").classList.add("hidden");
     e.target.reset();
-
     return createTask(formData);
 }
 function getFormData(){
@@ -105,7 +112,6 @@ function getFormData(){
 
 function createTask(formData){
     const project = findProject(formData.projectName);
-    console.log(formData);
     const newCard = createCard(project.createTask(formData));
     return newCard
 
@@ -115,27 +121,31 @@ function createTask(formData){
 function handleNewProject(e){
     e.preventDefault();
     const name = document.querySelector("#newProjectInput").value;
-    addProjectToArray(name);
+    addProjectToArray(new projects(name));
+    updateLocalStorage(getProjectArray());
     addProjectUI(name);
     document.querySelector("#projectOverlay").classList.add("hidden");
     document.querySelector("#taskProject").value = name;
 }
 
-function loadTabTasks(e){
-    const taskList = getTasks(e);
+function loadTabTasks(){
+    const taskList = getTasks();
     const cardList = [];
     taskList.forEach(task=>{
+        console.log(task.title);
         const newCard = createCard(task);
         cardList.push(newCard);
     })
     cardVisuals("renderNew", cardList);
 }
 
-function getTasks(e){
+
+function getTasks(){
     const selectedTab = document.querySelector(".navBtn.selectedBtn");
     console.log(selectedTab.id);
     if(selectedTab.id == "Home"){
         return retrieveAll();
+
     }
     else{
         return retrieveTasks(selectedTab.id);
@@ -169,7 +179,7 @@ function getCompletedTasks(){
 }
 
 
-function defaultCard(){
+/*function defaultCard(){
     addProjectToArray("Work");
     addProjectUI("Work");
     const formData = {
@@ -179,10 +189,28 @@ function defaultCard(){
         projectName: "Work",
         description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur eius asperiores voluptatem assumenda porro pariatur unde libero eum, nesciunt dicta totam cupiditate animi deleniti temporibus ipsam iste laboriosam quisquam maiores."
     }
+    const newTask = 
+    updateLocalStorage(getProjectArray());
+}*/
+
+function appendCard(formData){
     const newCard = createTask(formData);
     const cardList = [];
     cardList.push(newCard);
     cardVisuals("append", cardList);
+}
+function onLoad(savedProjects){
+    savedProjects.forEach(projectObject =>{
+        const project =  new projects(projectObject.name);
+        addProjectUI(projectObject.name);
+        projectObject.taskList.forEach(taskData =>{
+            const projectTask = project.createTask(taskData);
+        })
+        addProjectToArray(project);
+
+    })
+    loadTabTasks();
+
 }
 
 function navExecution(e){
@@ -192,4 +220,8 @@ function navExecution(e){
     else{
         loadTabTasks(e);
     }
+}
+
+function updateLocalStorage(projectArray){
+    localStorage.setItem("projectArray", JSON.stringify(projectArray))
 }

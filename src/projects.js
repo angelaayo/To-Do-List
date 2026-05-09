@@ -15,6 +15,7 @@ export class projects {
       formData.date,
       formData.priority,
       formData.projectName,
+      formData.completed,
       crypto.randomUUID(),
     );
     this.taskList.push(newTask);
@@ -30,8 +31,8 @@ export function getProjectArray() {
   return [...projectArray];
 }
 
-export function addProjectToArray(name) {
-  projectArray.push(new projects(name));
+export function addProjectToArray(project) {
+  projectArray.push(project);
 }
 
 export function findProject(name) {

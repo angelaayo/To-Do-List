@@ -1,10 +1,10 @@
 export class task {
-  constructor(title, description, dueDate, priority, project, id) {
+  constructor(title, description, dueDate, priority, project,completed = false, id) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.completed = false;
+    this.completed = completed;
     this.projectName = project;
     this.id = id;
   }
